@@ -1,4 +1,4 @@
-import app, { closeServer } from "../server";
+import app from "../server";
 import supertest from "supertest";
 import auth from "../middleware/auth";
 import userRouter from "../user/router";
@@ -8,6 +8,7 @@ import db from "../db";
 import UserCtrl from "../user/controller";
 import { User } from "../user/service";
 import { generateUserToken } from "../models/user";
+import { server } from "../servermock";
 
 
 const request = supertest(app);
@@ -18,6 +19,7 @@ const fakeToken = "eyJhbGciOiJIUzI1NiIsIkR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RuYW1l
 describe("Testing user Endpoints", () => {
     beforeAll(async () => {
         // db.connect();
+        
         const userToken = jest.fn(generateUserToken)
         user = {
             firstname: "Admin",
@@ -49,6 +51,6 @@ describe("Testing user Endpoints", () => {
 
     })
 afterAll(async() => {
-    await closeServer();
+    await server.close();
     await db.end();
 })
