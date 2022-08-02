@@ -18,7 +18,7 @@ class OrderCtrl {
         return __awaiter(this, void 0, void 0, function* () {
             const order = yield service_1.default.getCurrentOrder(req.params.id);
             if (order === null) {
-                return res.status(404).send(`There are no completed orders for User Id ${req.params.id}`);
+                return res.status(404).send(`There are no active orders for User Id ${req.params.id}`);
             }
             res.send(order);
         });

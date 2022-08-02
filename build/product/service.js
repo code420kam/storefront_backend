@@ -16,17 +16,17 @@ const db_1 = __importDefault(require("../db"));
 class ProductService {
     static getAllProducts() {
         return __awaiter(this, void 0, void 0, function* () {
-            const con = yield db_1.default.connect();
+            // const con = await db.connect();
             const result = yield db_1.default.query(`SELECT * FROM products`);
-            con.release();
+            // con.release();
             return result.rows;
         });
     }
     static getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const con = yield db_1.default.connect();
+            // const con = await db.connect();
             const result = yield db_1.default.query(`SELECT * FROM products WHERE product_id=${id}`);
-            con.release();
+            // con.release();
             if (result.rows.length === 0) {
                 return null;
             }
@@ -36,10 +36,14 @@ class ProductService {
     static createProductQuery(product) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const con = yield db_1.default.connect();
-                const sql = `INSERT INTO products (product_name, product_price) VALUES ('${product.product_name}', '${product.product_price}')`;
+                // const con = await db.connect();
+                // if(product.product_category === undefined)
+                // {
+                //     product.product_category === 
+                // }
+                const sql = `INSERT INTO products (product_name, product_price, product_category) VALUES ('${product.product_name}', '${product.product_price}', '${product.product_category}')`;
                 const result = yield db_1.default.query(sql);
-                con.release;
+                // con.release;
                 return result.rows;
             }
             catch (e) {
@@ -49,10 +53,10 @@ class ProductService {
     }
     static addProductToOrder(product, user_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const con = yield db_1.default.connect();
+            // const con = await db.connect();
             const sql = `INSERT INTO orders (quantity, product_id, user_id) VALUES (${product.quantity}, ${product.id}, '${user_id}')`;
             const result = yield db_1.default.query(sql);
-            con.release();
+            // con.release();
             return result.rows;
         });
     }

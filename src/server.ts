@@ -5,6 +5,7 @@ import "dotenv/config"
 import userRouter from './user/router';
 import productRouter from "./product/router";
 import orderRouter from "./order/router";
+// import server from './servermock';
 
 const app: express.Application = express()
 const port = process.env.SERVER_PORT
@@ -20,5 +21,9 @@ app.get('/', function (req: Request, res: Response) {
     res.send('Hello World!')
 })
 
-
+// server.listen(port)
+ export const server = app.listen(port, () => {
+    console.log("Listen on Port " + port)
+ })
+export const closeServer = async () => await server.close();
 export default app;

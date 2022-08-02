@@ -51,7 +51,7 @@ class ProductCtrl {
             if (header !== undefined) {
                 const decode = yield jwt.verify(header, "secret12");
                 const id = decode.id;
-                const sql = `INSERT INTO orders (user_id, product_id, quantity) VALUES (${id}, ${req.body.product_id}, ${req.body.quantity})`;
+                const sql = `INSERT INTO orders (user_id, product_id, quantity, order_status) VALUES (${id}, ${req.body.product_id}, ${req.body.quantity}, FALSE)`;
                 const query = yield db_1.default.query(sql);
                 return res.send(query.rows);
             }

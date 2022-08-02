@@ -1,5 +1,6 @@
 import { Router } from "express";
 import auth from "../middleware/auth";
+import app from "../server";
 import UserCtrl from "./controller";
 
 export default Router()

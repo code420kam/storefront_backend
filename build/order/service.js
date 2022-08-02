@@ -16,10 +16,10 @@ const db_1 = __importDefault(require("../db"));
 class OrderService {
     static getCurrentOrder(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const con = yield db_1.default.connect();
+            // const con = await db.connect();
             const sql = yield db_1.default.query(`SELECT *, CASE WHEN order_status=true THEN 'complete' WHEN order_status=false THEN 'active'
         END AS order_status FROM orders WHERE order_status=false AND user_id='${id}'`);
-            con.release();
+            // con.release();
             if (sql.rows.length === 0) {
                 return null;
             }

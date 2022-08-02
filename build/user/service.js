@@ -17,9 +17,9 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 class UserService {
     static getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const con = yield db_1.default.connect();
+            // const con = await client.connect();
             const result = yield db_1.default.query(`SELECT * FROM users WHERE user_id=${id}`);
-            con.release();
+            // con.release()
             if (result.rows.length === 0) {
                 return;
             }
@@ -30,9 +30,9 @@ class UserService {
     ;
     static getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            const con = yield db_1.default.connect();
+            // const con = await client.connect();
             const result = yield db_1.default.query(`SELECT * from users`);
-            con.release();
+            // con.release();
             return result.rows;
         });
     }
@@ -40,13 +40,13 @@ class UserService {
     static newUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const con = yield db_1.default.connect();
+                // const con = await db.connect();
                 const salt = yield bcrypt_1.default.genSalt(10);
                 const hash = yield bcrypt_1.default.hashSync(user.password + process.env.SECRET_PW, salt);
                 const sql = `INSERT INTO users (firstname, lastname, passwort) VALUES ('${user.firstname}', '${user.lastname}', '${hash}')`;
                 console.log(`New User ${user.firstname} ${user.lastname} successfully created`);
                 const result = yield db_1.default.query(sql);
-                con.release();
+                // con.release();
                 return result.rows;
             }
             catch (e) {
@@ -57,11 +57,11 @@ class UserService {
     }
     static getPassword(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const con = yield db_1.default.connect();
+            // const con = await db.connect();
             const sql = `SELECT passwort FROM users WHERE (firstname='${user.firstname}') AND (lastname='${user.lastname}') `;
             const result = yield db_1.default.query(sql);
             const pw = user.password + "secret12";
-            con.release();
+            // con.release();
             if (bcrypt_1.default.compareSync(pw, result.rows[0].passwort)) {
                 return user;
             }
