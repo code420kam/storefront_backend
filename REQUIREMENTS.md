@@ -25,18 +25,18 @@ These are the notes from a meeting with the frontend developer that describe wha
 - name
 - price
 - [OPTIONAL] category
-``
-`TABLE: products (product_id INT GENERATED ALWAYS AS IDENTITY, product_name VARCHAR(200) NOT NULL, product_price MONEY NOT NULL, product_category VARCHAR(50) NULL, PRIMARY KEY(product_id)`
-``
+```
+TABLE: products (product_id INT GENERATED ALWAYS AS IDENTITY, product_name VARCHAR(200) NOT NULL, product_price MONEY NOT NULL, product_category VARCHAR(50) NULL, PRIMARY KEY(product_id)
+```
 
 #### User
 - id
 - firstName
 - lastName
 - password
-``
-` TABLE: users (user_id INT GENERATED ALWAYS AS IDENTITY, firstname VARCHAR(60), lastname VARCHAR(60), passwort VARCHAR(200), PRIMARY KEY(user_id)`
-``
+```
+ TABLE: users (user_id INT GENERATED ALWAYS AS IDENTITY, firstname VARCHAR(60), lastname VARCHAR(60), passwort VARCHAR(200), PRIMARY KEY(user_id)
+```
 
 
 #### Orders
