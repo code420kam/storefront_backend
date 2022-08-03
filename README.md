@@ -56,6 +56,21 @@ run `npm run migrate-up` to migrate the initial database up. There will be a adm
 Account informations are firstname & lastname : Admin
 Password is: admin.
 
+## Environment
+Bellow are the environmental variables that needs to be set in a `.env` file. This is the default setting that I used for development, but you can change it to what works for you.
+```
+SERVER_PORT=3000
+POSTGRES_PORT=5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=admin123
+POSTGRES_DB=new_database01
+PGADMIN_DEFAULT_EMAIL=admin@admin.de
+PGADMIN_DEFAULT_PASSWORD=admin
+POSTGRES_URL=localhost
+SECRET_PW=secret12
+SALT_ROUNDS=10
+```
+
 ## Start App
 run `npm start` to start the application after you haved setted up your DB and connected it to your socket.
 
