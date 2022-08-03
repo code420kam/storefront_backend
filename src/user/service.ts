@@ -1,8 +1,5 @@
 import db from "../db";
-import client from "../db";
 import bcrypt from "bcrypt";
-import { Connection, Pool } from "pg";
-import { updateInterfaceDeclaration } from "typescript";
 
 export type User = {
     id?: number,
@@ -17,16 +14,16 @@ export default class UserService{
         const result = await db.query(`SELECT * FROM users WHERE user_id=${id}`);
         if(result.rows.length === 0){
             return undefined;
-        };
+        }
         return result.rows;
-    };
+    }
 
     static async getAll() :Promise<string[]>{
         // const con = await client.connect();
         const result = await db.query(`SELECT * from users`);
         // con.release();
         return result.rows;
-    };
+    }
 
     static async newUser(user : User):Promise<void|string[]>{
         try{
@@ -41,7 +38,7 @@ export default class UserService{
         }catch(e)
         {
             console.log("Wrong values passed "  + e)
-        };
+        }
     }
     static async getPassword(user:User) :Promise<null|User>{
         // const con = await db.connect();
@@ -51,7 +48,7 @@ export default class UserService{
         // con.release();
         if(bcrypt.compareSync(pw, result.rows[0].passwort)){
             return user;
-        };
+        }
         return null;
         
     }

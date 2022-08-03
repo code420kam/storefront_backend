@@ -1,6 +1,7 @@
-import {Request, Response, NextFunction, response} from "express";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import {Request, Response, NextFunction} from "express";
+import jwt from "jsonwebtoken";
 import "dotenv/config";
+
 
 async function auth (req: Request, res: Response, next: NextFunction){
     
@@ -11,7 +12,7 @@ async function auth (req: Request, res: Response, next: NextFunction){
     }
     if(secret)
     try{
-        const verify: string|JwtPayload = jwt.verify(token, secret);
+         const verify = jwt.verify(token, secret);
         res.header(verify);
         next();
     }

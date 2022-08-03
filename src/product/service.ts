@@ -1,6 +1,4 @@
 import db from "../db";
-import bcrypt from "bcrypt";
-import ProductCtrl from "./controller";
 
 export type Product = {
     id?: number,

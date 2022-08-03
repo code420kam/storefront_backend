@@ -23,7 +23,7 @@ app.get('/', function (req: Request, res: Response) {
 
 // server.listen(port)
  export const server = app.listen(port, () => {
-    console.log("Listen on Port " + port)
+    console.log(`Listening on ${address}:${port}`)
  })
 export const closeServer = async () => await server.close();
 export default app;

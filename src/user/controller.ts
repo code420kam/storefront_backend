@@ -12,7 +12,7 @@ export default class UserCtrl{
         };
             const newUser = await UserService.newUser(user);
             res.json(newUser);
-    };
+    }
     //user login function
     static async userLogin(req: Request, res: Response):Promise<Response|void>{
         const user:User = {
@@ -30,7 +30,7 @@ export default class UserCtrl{
             const publicToken  = await generateUserToken(user);
             res.header("authorization", publicToken);
             res.send(`Welcome back ${user.firstname} ${user.lastname}!`);
-        };
+        }
 
     //getting all available Users
     static async getAllUsers(req: Request, res: Response):Promise<void> {
@@ -49,7 +49,7 @@ export default class UserCtrl{
             const singleUser = await UserService.getById(req.params.id);
             if(singleUser === undefined){
                 res.status(404).send("Error: User doesn't exists");
-            };
+            }
             res.send(singleUser);
-    };
+    }
 }

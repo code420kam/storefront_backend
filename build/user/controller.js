@@ -27,7 +27,6 @@ class UserCtrl {
             res.json(newUser);
         });
     }
-    ;
     //user login function
     static userLogin(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -45,7 +44,6 @@ class UserCtrl {
             res.send(`Welcome back ${user.firstname} ${user.lastname}!`);
         });
     }
-    ;
     //getting all available Users
     static getAllUsers(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -65,10 +63,8 @@ class UserCtrl {
             if (singleUser === undefined) {
                 res.status(404).send("Error: User doesn't exists");
             }
-            ;
             res.send(singleUser);
         });
     }
-    ;
 }
 exports.default = UserCtrl;

@@ -22,11 +22,9 @@ class UserService {
             if (result.rows.length === 0) {
                 return undefined;
             }
-            ;
             return result.rows;
         });
     }
-    ;
     static getAll() {
         return __awaiter(this, void 0, void 0, function* () {
             // const con = await client.connect();
@@ -35,7 +33,6 @@ class UserService {
             return result.rows;
         });
     }
-    ;
     static newUser(user) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -51,7 +48,6 @@ class UserService {
             catch (e) {
                 console.log("Wrong values passed " + e);
             }
-            ;
         });
     }
     static getPassword(user) {
@@ -64,7 +60,6 @@ class UserService {
             if (bcrypt_1.default.compareSync(pw, result.rows[0].passwort)) {
                 return user;
             }
-            ;
             return null;
         });
     }

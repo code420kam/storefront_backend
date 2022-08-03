@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const db_1 = __importDefault(require("../db"));
 const service_1 = __importDefault(require("./service"));
-const jwt = require("jsonwebtoken");
+const jwt_decode_1 = __importDefault(require("jwt-decode"));
 class ProductCtrl {
     static allProducts(_req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -22,7 +22,6 @@ class ProductCtrl {
             res.send(products);
         });
     }
-    ;
     static getProductById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const singleProduct = yield service_1.default.getById(req.params.id);
@@ -32,7 +31,6 @@ class ProductCtrl {
             res.send(singleProduct);
         });
     }
-    ;
     static createProduct(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const product = {
@@ -44,7 +42,6 @@ class ProductCtrl {
             res.json(product);
         });
     }
-    ;
     // static async addProduct(req: Request, res: Response) {
     //     const product: Product = {
     //         product_name : req.body.product_name,
@@ -56,18 +53,15 @@ class ProductCtrl {
     static createOrder(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             //here we need to decode jwt token to get the user id
-            const header = req.headers.authorization;
-            if (header !== undefined) {
-                const decode = yield jwt.verify(header, "secret12");
-                const id = decode.id;
-                const sql = `INSERT INTO orders (user_id, product_id, quantity, order_status) VALUES (${id}, ${req.body.product_id}, ${req.body.quantity}, FALSE)`;
+            const token = req.header("authorization");
+            if (token !== undefined) {
+                const payload = yield (0, jwt_decode_1.default)(token);
+                const sql = `INSERT INTO orders (user_id, product_id, quantity, order_status) VALUES (${payload.id}, ${req.body.product_id}, ${req.body.quantity}, FALSE)`;
                 const query = yield db_1.default.query(sql);
                 return res.send(query.rows);
             }
-            ;
             return res.status(401).send("Token required");
         });
     }
-    ;
 }
 exports.default = ProductCtrl;
