@@ -3,7 +3,7 @@ import { User } from "../user/service"
 import "dotenv/config";
 import db from "../db";
 
-export const generateUserToken = async (user: User)=> {
+export const generateUserToken = async (user: User) :Promise<string>=>{
     const secret = process.env.SECRET_PW;
     if(secret)
     {

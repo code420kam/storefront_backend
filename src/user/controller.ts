@@ -4,7 +4,7 @@ import { generateUserToken } from "../models/user";
 
 export default class UserCtrl{
     //creating new User
-    static async createUser (req: Request, res: Response) {
+    static async createUser (req: Request, res: Response):Promise<void> {
         const user: User = {
             firstname : req.body.firstname,
             lastname : req.body.lastname,
@@ -14,7 +14,7 @@ export default class UserCtrl{
             res.json(newUser);
     };
     //user login function
-    static async userLogin(req: Request, res: Response){
+    static async userLogin(req: Request, res: Response):Promise<Response|void>{
         const user:User = {
             firstname : req.body.firstname,
             lastname: req.body.lastname,
@@ -33,7 +33,7 @@ export default class UserCtrl{
         };
 
     //getting all available Users
-    static async getAllUsers(req: Request, res: Response) {
+    static async getAllUsers(req: Request, res: Response):Promise<void> {
         try{
             const users = await UserService.getAll();
             res.send(users)
@@ -45,7 +45,7 @@ export default class UserCtrl{
     }
 
     //getting single user searched by id
-    static async getUserById(req: Request, res: Response) {
+    static async getUserById(req: Request, res: Response):Promise<void> {
             const singleUser = await UserService.getById(req.params.id);
             if(singleUser === undefined){
                 res.status(404).send("Error: User doesn't exists");

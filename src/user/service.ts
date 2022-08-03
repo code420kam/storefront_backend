@@ -12,7 +12,7 @@ export type User = {
 }
 
 export default class UserService{
-    static async getById(id: string){
+    static async getById(id: string):Promise<undefined|string[]>{
         // const con = await client.connect();
         const result = await db.query(`SELECT * FROM users WHERE user_id=${id}`);
         if(result.rows.length === 0){
@@ -21,14 +21,14 @@ export default class UserService{
         return result.rows;
     };
 
-    static async getAll() {
+    static async getAll() :Promise<string[]>{
         // const con = await client.connect();
         const result = await db.query(`SELECT * from users`);
         // con.release();
         return result.rows;
     };
 
-    static async newUser(user : User){
+    static async newUser(user : User):Promise<void|string[]>{
         try{
             // const con = await db.connect();
             const salt = await bcrypt.genSalt(10);
@@ -43,7 +43,7 @@ export default class UserService{
             console.log("Wrong values passed "  + e)
         };
     }
-    static async getPassword(user:User) {
+    static async getPassword(user:User) :Promise<null|User>{
         // const con = await db.connect();
         const sql = `SELECT passwort FROM users WHERE (firstname='${user.firstname}') AND (lastname='${user.lastname}') `;
         const result = await db.query(sql);

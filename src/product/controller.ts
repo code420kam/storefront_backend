@@ -5,19 +5,19 @@ import ProductService, {Product} from "./service";
 const jwt = require("jsonwebtoken");
 
 export default class ProductCtrl{
-    static async allProducts(_req: Request, res: Response) {
+    static async allProducts(_req: Request, res: Response):Promise<void> {
         const products = await ProductService.getAllProducts();
         res.send(products);
     };
 
-    static async getProductById(req: Request, res: Response) {
+    static async getProductById(req: Request, res: Response) :Promise<Response|undefined>{
             const singleProduct = await ProductService.getById(req.params.id);
             if(singleProduct === null){
                 return res.status(404).send(`Product with id ${req.params.id} not found.`);
             }
             res.send(singleProduct);    
     };
-    static async createProduct(req: Request, res: Response) {
+    static async createProduct(req: Request, res: Response):Promise<void> {
         const product: Product = {
             product_name: req.body.product_name,
             product_price: req.body.product_price,
@@ -34,7 +34,7 @@ export default class ProductCtrl{
     //     }
     //     await ProductService.addProductToOrder()
     // }
-    static async createOrder(req: Request, res: Response) {
+    static async createOrder(req: Request, res: Response):Promise<Response> {
         //here we need to decode jwt token to get the user id
         const header = req.headers.authorization;
         if(header !== undefined)

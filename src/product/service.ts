@@ -12,13 +12,13 @@ export type Product = {
 
 export default class ProductService{
 
-    static async getAllProducts() {
+    static async getAllProducts() :Promise<string[]>{
         // const con = await db.connect();
         const result = await db.query(`SELECT * FROM products`);
         // con.release();
         return result.rows;
     }
-    static async getById(id: string) {
+    static async getById(id: string):Promise<null|string[]> {
         // const con = await db.connect();
         const result = await db.query(`SELECT * FROM products WHERE product_id=${id}`);
         // con.release();
@@ -28,7 +28,7 @@ export default class ProductService{
         }
         return result.rows;
     }
-    static async createProductQuery(product: Product) {
+    static async createProductQuery(product: Product):Promise<string[]|void> {
         try{
             // const con = await db.connect();
             const sql = `INSERT INTO products (product_name, product_price, product_category) VALUES ('${product.product_name}', '${product.product_price}', '${product.product_category}')`;
