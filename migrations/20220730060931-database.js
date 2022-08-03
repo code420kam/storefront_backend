@@ -55,14 +55,7 @@ exports.up = function(db) {
   INSERT INTO orders(user_id, product_id, quantity, order_status) VALUES (1,1, 40, FALSE);
   INSERT INTO orders(user_id, product_id, quantity, order_status) VALUES (1,3, 14, TRUE);
   `);
-};//passwort admin
-
-
-//orderstatus von true oder false auf active oder complete ändern;
-// SELECT order_status, CASE WHEN order_status=true THEN 'complete' WHEN order_status=false THEN 'active' END AS order_status FROM orders;
-
-
-
+};
 
 exports.down = function(db) {
   return db.runSql(`
