@@ -35,8 +35,6 @@ export default class UserCtrl{
     //getting all available Users
     static async getAllUsers(req: Request, res: Response) {
         try{
-            const publicToken = req.headers.authorization;
-            console.log("publictoken= " + publicToken)
             const users = await UserService.getAll();
             res.send(users)
         }

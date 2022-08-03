@@ -50,8 +50,6 @@ class UserCtrl {
     static getAllUsers(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const publicToken = req.headers.authorization;
-                console.log("publictoken= " + publicToken);
                 const users = yield service_1.default.getAll();
                 res.send(users);
             }

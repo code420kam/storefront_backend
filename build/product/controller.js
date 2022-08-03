@@ -37,13 +37,22 @@ class ProductCtrl {
         return __awaiter(this, void 0, void 0, function* () {
             const product = {
                 product_name: req.body.product_name,
-                product_price: req.body.product_price
+                product_price: req.body.product_price,
+                product_category: req.body.product_category
             };
             yield service_1.default.createProductQuery(product);
             res.json(product);
         });
     }
     ;
+    // static async addProduct(req: Request, res: Response) {
+    //     const product: Product = {
+    //         product_name : req.body.product_name,
+    //         product_price : req.body.product_price,
+    //         product_category: req.body.product_category
+    //     }
+    //     await ProductService.addProductToOrder()
+    // }
     static createOrder(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             //here we need to decode jwt token to get the user id

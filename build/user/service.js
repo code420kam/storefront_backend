@@ -19,9 +19,8 @@ class UserService {
         return __awaiter(this, void 0, void 0, function* () {
             // const con = await client.connect();
             const result = yield db_1.default.query(`SELECT * FROM users WHERE user_id=${id}`);
-            // con.release()
             if (result.rows.length === 0) {
-                return;
+                return undefined;
             }
             ;
             return result.rows;

@@ -31,22 +31,19 @@ export default class ProductService{
     static async createProductQuery(product: Product) {
         try{
             // const con = await db.connect();
-            // if(product.product_category === undefined)
-            // {
-            //     product.product_category === 
-            // }
             const sql = `INSERT INTO products (product_name, product_price, product_category) VALUES ('${product.product_name}', '${product.product_price}', '${product.product_category}')`;
             const result = await db.query(sql)
             // con.release;
             return result.rows;
         }catch(e)
-        {console.log("Error at create Product Query " + e)}
+        {
+            console.log("Error at create Product Query " + e)}
     }
-    static async addProductToOrder(product: Product, user_id:string) {
-        // const con = await db.connect();
-        const sql = `INSERT INTO orders (quantity, product_id, user_id) VALUES (${product.quantity}, ${product.id}, '${user_id}')`;
-        const result = await db.query(sql);
-        // con.release();
-        return result.rows;
-    }
+    // static async addProductToOrder(product: Product, user_id:string) {
+    //     // const con = await db.connect();
+    //     const sql = `INSERT INTO orders (quantity, product_id, user_id, order_status) VALUES (${product.quantity}, ${product.id}, '${user_id}', FALSE)`;
+    //     const result = await db.query(sql);
+    //     // con.release();
+    //     return result.rows;
+    // }
 }

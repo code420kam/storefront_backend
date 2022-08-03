@@ -1,18 +1,7 @@
 import app, { closeServer } from "../server";
 import supertest from "supertest";
-import auth from "../middleware/auth";
-import userRouter from "../user/router";
-import productRouter from "../product/router";
-import orderRouter from "../order/router";
-import db from "../db";
-import server from "../server";
-import UserCtrl from "../user/controller";
 import { User } from "../user/service";
 import { generateUserToken } from "../models/user";
-import { response } from "express";
-import exp from "constants";
-// import { server } from "../servermock";
-
 
 const request = supertest(app);
 let token:any;
@@ -32,13 +21,13 @@ describe("Testing user Endpoints", () => {
 
     test("Testing to get All Users with token", async () => {
         const req =  request.get("/user/");
-        req.set("Authorization", token)
-        expect((await req).status).toBe(200)
+        req.set("Authorization", token);
+        expect((await req).status).toBe(200);
     });
     test("Trying to get all users with fake token",async () => {
         const req = request.get("/user/");
-        req.set("Authorization", fakeToken)
-        expect((await req).status).toBe(401)
+        req.set("Authorization", fakeToken);
+        expect((await req).status).toBe(401);
     });
     test("trying to get user by id",async () => {
         const req = request.get("/user/1");
@@ -53,11 +42,11 @@ describe("Testing user Endpoints", () => {
     test("Create a new user",async () => {
         const req = request.post("/user/create");
         req.set("Authorization", token);
-        (await req).body = {
+        req.send({
             "firstname": "examplefirstname",
             "lastname" : "examplelastname",
-            "passwort" : "examplepasswort"}
-        expect((await req).status).toBe(200)
+            "passwort" : "examplepasswort"});
+        expect((await req).status).toBe(200);
     });
     })
     describe("Testing products endpoint", () => {
@@ -76,34 +65,34 @@ describe("Testing user Endpoints", () => {
        test("try to create a product",async () => {
         const req = request.post("/products/create");
         req.set("Authorization", token);
-        (await req).body = {
-            "product_price": 988,
+        
+        req.send({
+            "product_price": "988",
             "product_name" : "example_Product",
-           };
-        expect((await req).status).toBe(200)
+           })
+        expect((await req).status).toBe(200);
        });
        test("try to create a product without token",async () => {
         const req = request.post("/products/create");
-        (await req).body = {
+        req.send({
             "product_price": 988,
             "product_name" : "example_Product",
-           };
-        expect((await req).status).toBe(401)
+           });
+        expect((await req).status).toBe(401);
        });
 })
 describe("Testing order endpoint", () => {
     test("Try to get order by user id",async () => {
         const req = request.get("/order/1");
         req.set("Authorization", token);
-        expect((await req).status).toBe(200)
+        expect((await req).status).toBe(200);
     });
     test("Try to get a not existing order by user id",async () => {
         const req = request.get("/order/999");
         req.set("Authorization", token);
-        expect((await req).status).toBe(404)
+        expect((await req).status).toBe(404);
     })
 })
             afterAll(async() => {
-                
             await closeServer();
 })

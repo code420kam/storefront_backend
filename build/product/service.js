@@ -37,10 +37,6 @@ class ProductService {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 // const con = await db.connect();
-                // if(product.product_category === undefined)
-                // {
-                //     product.product_category === 
-                // }
                 const sql = `INSERT INTO products (product_name, product_price, product_category) VALUES ('${product.product_name}', '${product.product_price}', '${product.product_category}')`;
                 const result = yield db_1.default.query(sql);
                 // con.release;
@@ -49,15 +45,6 @@ class ProductService {
             catch (e) {
                 console.log("Error at create Product Query " + e);
             }
-        });
-    }
-    static addProductToOrder(product, user_id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            // const con = await db.connect();
-            const sql = `INSERT INTO orders (quantity, product_id, user_id) VALUES (${product.quantity}, ${product.id}, '${user_id}')`;
-            const result = yield db_1.default.query(sql);
-            // con.release();
-            return result.rows;
         });
     }
 }

@@ -20,11 +20,20 @@ export default class ProductCtrl{
     static async createProduct(req: Request, res: Response) {
         const product: Product = {
             product_name: req.body.product_name,
-            product_price: req.body.product_price
+            product_price: req.body.product_price,
+            product_category: req.body.product_category
         };
         await ProductService.createProductQuery(product);
         res.json(product);
     };
+    // static async addProduct(req: Request, res: Response) {
+    //     const product: Product = {
+    //         product_name : req.body.product_name,
+    //         product_price : req.body.product_price,
+    //         product_category: req.body.product_category
+    //     }
+    //     await ProductService.addProductToOrder()
+    // }
     static async createOrder(req: Request, res: Response) {
         //here we need to decode jwt token to get the user id
         const header = req.headers.authorization;
