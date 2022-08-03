@@ -1,4 +1,5 @@
 node_modules
 endpoint.test.ts
 models.test.ts
+server.ts
 .env

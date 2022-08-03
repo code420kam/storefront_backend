@@ -16,7 +16,7 @@
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "test": "npm run build && jest --forceExit",
     "lint": "eslint . --ext .ts",
-    "prettier": "prettier --config .prettierrc '../src/**.ts' --write",
+    "prettier": "prettier --config .prettierrc **/*.ts --write",
     "tsc": "tsc",
     "db": "docker-compose up",
     "migrate-up": "db-migrate up",
