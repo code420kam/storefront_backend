@@ -41,10 +41,17 @@ TABLE: products (product_id INT GENERATED ALWAYS AS IDENTITY, product_name VARCH
 
 #### Orders
 - id
-- id of each product in the order
-- quantity of each product in the order
 - user_id
 - status of order (active or complete)
 ```
-TABLE: orders (order_id INT GENERATED ALWAYS AS IDENTITY, quantity INT, user_id INT, product_id INT, order_status BOOLEAN NOT NULL, PRIMARY KEY(order_id), CONSTRAINT fk_product_id FOREIGN KEY(product_id) REFERENCES products(product_id), CONSTRAINT fk_user_id FOREIGN KEY(user_id) REFERENCES users(user_id)
+TABLE: orders (order_id INT GENERATED ALWAYS AS IDENTITY,  user_id INT, order_status BOOLEAN NOT NULL, PRIMARY KEY(order_id), CONSTRAINT fk_product_id FOREIGN KEY(product_id) REFERENCES products(product_id), CONSTRAINT fk_user_id FOREIGN KEY(user_id) REFERENCES users(user_id)
+```
+#### order_products
+- id
+- order_id
+- product_id
+- quantity
+```
+ TABLE: order_products(id INT GENERATED ALWAYS AS IDENTITY NOT NULL, order_id INT, product_id INT, quantity INT,
+ CONSTRAINT fk_product_id FOREIGN KEY(product_id) REFERENCES products(product_id), CONSTRAINT fk_order_id FOREIGN KEY(order_id) REFERENCES orders(order_id))
 ```
