@@ -43,7 +43,7 @@ export default class UserService {
         // const con = await db.connect();
         const sql = `SELECT password FROM users WHERE (firstname='${user.firstname}') AND (lastname='${user.lastname}') `
         const result = await client.query(sql)
-        const pw = user.password + 'secret12'
+        const pw = user.password + process.env.SECRET_PW
         // con.release();
         if (bcrypt.compareSync(pw, result.rows[0].password)) {
             return user
