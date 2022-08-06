@@ -54,6 +54,10 @@ You can fork this repo and run the following commands at your root directory to 
 #### jwt-decode
 `npm i jwt-decode`
 
+#### babel
+`npm i --save-dev babel`
+`npm i @types/babel`
+
 ## Set up Database
 run `npm run migrate-up` to migrate the initial database up. There will be a admin account.
 Account informations are 
