@@ -100,7 +100,7 @@ run `npm start` to start the application after you haved setted up your DB and c
 Account informations are 
 ```
 firstname & lastname : Admin
-Password is: admin.
+Password is: admin
 ```
 
 ## Close Database
