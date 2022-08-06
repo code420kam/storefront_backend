@@ -58,6 +58,9 @@ You can fork this repo and run the following commands at your root directory to 
 `npm i --save-dev babel`
 `npm i @types/babel`
 
+#### Cross-Env
+`npm i --save-dev cross-env`
+
 ## Environment Variables
 Bellow are the environmental variables that needs to be set in a `.env` file. This is the default setting that I used for development, but you can change it to what works for you.
 ```
