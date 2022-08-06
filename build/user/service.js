@@ -39,25 +39,25 @@ class UserService {
                 // const con = await db.connect();
                 const salt = yield bcrypt_1.default.genSalt(10);
                 const hash = yield bcrypt_1.default.hashSync(user.password + process.env.SECRET_PW, salt);
-                const sql = `INSERT INTO users (firstname, lastname, passwort) VALUES ('${user.firstname}', '${user.lastname}', '${hash}')`;
+                const sql = `INSERT INTO users (firstname, lastname, password) VALUES ('${user.firstname}', '${user.lastname}', '${hash}')`;
                 console.log(`New User ${user.firstname} ${user.lastname} successfully created`);
                 const result = yield db_1.default.query(sql);
                 // con.release();
                 return result.rows;
             }
             catch (e) {
-                console.log("Wrong values passed " + e);
+                console.log('Wrong values passed ' + e);
             }
         });
     }
     static getPassword(user) {
         return __awaiter(this, void 0, void 0, function* () {
             // const con = await db.connect();
-            const sql = `SELECT passwort FROM users WHERE (firstname='${user.firstname}') AND (lastname='${user.lastname}') `;
+            const sql = `SELECT password FROM users WHERE (firstname='${user.firstname}') AND (lastname='${user.lastname}') `;
             const result = yield db_1.default.query(sql);
-            const pw = user.password + "secret12";
+            const pw = user.password + 'secret12';
             // con.release();
-            if (bcrypt_1.default.compareSync(pw, result.rows[0].passwort)) {
+            if (bcrypt_1.default.compareSync(pw, result.rows[0].password)) {
                 return user;
             }
             return null;

@@ -43,8 +43,16 @@ class ProductService {
                 return result.rows;
             }
             catch (e) {
-                console.log("Error at create Product Query " + e);
+                console.log('Error at create Product Query ' + e);
             }
+        });
+    }
+    static createOrderFromProduct(id, query) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield db_1.default.query(`INSERT INTO orders (user_id, order_status) VALUES ('${id}', 'FALSE') `);
+            const orderId = yield db_1.default.query(`SELECT order_id FROM orders WHERE (user_id = ${id})`);
+            const productOrders = `INSERT INTO order_products (order_id, product_id, quantity) VALUES (${orderId.rows[0].order_id}, ${query.product_id}, ${query.quantity})`;
+            return yield db_1.default.query(productOrders);
         });
     }
 }

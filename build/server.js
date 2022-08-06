@@ -20,21 +20,20 @@ require("dotenv/config");
 const router_1 = __importDefault(require("./user/router"));
 const router_2 = __importDefault(require("./product/router"));
 const router_3 = __importDefault(require("./order/router"));
-// import server from './servermock';
 const app = (0, express_1.default)();
 const port = process.env.SERVER_PORT;
 const address = process.env.POSTGRES_URL;
 app.use(body_parser_1.default.json());
 app.use((0, cookie_parser_1.default)());
-app.use("/user", router_1.default);
-app.use("/products", router_2.default);
-app.use("/order", router_3.default);
+app.use('/user', router_1.default);
+app.use('/products', router_2.default);
+app.use('/order', router_3.default);
 app.get('/', function (req, res) {
     res.send('Hello World!');
 });
 // server.listen(port)
 exports.server = app.listen(port, () => {
-    console.log("Listen on Port " + port);
+    console.log(`Listening on ${address}:${port}`);
 });
 const closeServer = () => __awaiter(void 0, void 0, void 0, function* () { return yield exports.server.close(); });
 exports.closeServer = closeServer;

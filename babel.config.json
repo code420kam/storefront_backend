@@ -8,5 +8,5 @@
 		"@babel/plugin-proposal-nullish-coalescing-operator",
 		"@babel/plugin-transform-typescript"
 	],
-	"ignore": ["node_modules", ".env"]
+	"ignore": ["node_modules", ".env", "20220730060931-database"]
 }

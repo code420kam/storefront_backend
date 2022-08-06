@@ -51,11 +51,16 @@ You can fork this repo and run the following commands at your root directory to 
 `npm i supertest`
 `npm i --save-dev @types/supertest`
 
+#### jwt-decode
+`npm i jwt-decode`
+
 ## Set up Database
 run `npm run migrate-up` to migrate the initial database up. There will be a admin account.
-Account informations are firstname & lastname : Admin
+Account informations are 
+```
+firstname & lastname : Admin
 Password is: admin.
-
+```
 ## Environment
 Bellow are the environmental variables that needs to be set in a `.env` file. This is the default setting that I used for development, but you can change it to what works for you.
 ```

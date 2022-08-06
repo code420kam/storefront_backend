@@ -33,14 +33,15 @@ class UserCtrl {
             const user = {
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
-                password: req.body.password
+                password: req.body.password,
             };
+            console.log(user);
             const authentication = yield service_1.default.getPassword(user);
             if (authentication === null) {
-                return res.send("Login failure. Firstname or lastname or password wrong. Please try again");
+                return res.send('Login failure. Firstname or lastname or password wrong. Please try again');
             }
             const publicToken = yield (0, user_1.generateUserToken)(user);
-            res.header("authorization", publicToken);
+            res.header('authorization', publicToken);
             res.send(`Welcome back ${user.firstname} ${user.lastname}!`);
         });
     }
@@ -52,7 +53,7 @@ class UserCtrl {
                 res.send(users);
             }
             catch (e) {
-                res.status(400).send("Unknown Error " + e);
+                res.status(400).send('Unknown Error ' + e);
             }
         });
     }

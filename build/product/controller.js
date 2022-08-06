@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const db_1 = __importDefault(require("../db"));
 const service_1 = __importDefault(require("./service"));
 const jwt_decode_1 = __importDefault(require("jwt-decode"));
 class ProductCtrl {
@@ -36,31 +35,28 @@ class ProductCtrl {
             const product = {
                 product_name: req.body.product_name,
                 product_price: req.body.product_price,
-                product_category: req.body.product_category
+                product_category: req.body.product_category,
             };
             yield service_1.default.createProductQuery(product);
             res.json(product);
         });
     }
-    // static async addProduct(req: Request, res: Response) {
-    //     const product: Product = {
-    //         product_name : req.body.product_name,
-    //         product_price : req.body.product_price,
-    //         product_category: req.body.product_category
-    //     }
-    //     await ProductService.addProductToOrder()
-    // }
     static createOrder(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body.length);
             //here we need to decode jwt token to get the user id
-            const token = req.header("authorization");
+            const token = req.header('authorization');
             if (token !== undefined) {
+                const data = {
+                    product_id: req.body.product_id,
+                    quantity: req.body.quantity,
+                };
                 const payload = yield (0, jwt_decode_1.default)(token);
-                const sql = `INSERT INTO orders (user_id, product_id, quantity, order_status) VALUES (${payload.id}, ${req.body.product_id}, ${req.body.quantity}, FALSE)`;
-                const query = yield db_1.default.query(sql);
-                return res.send(query.rows);
+                console.log(payload.id);
+                yield service_1.default.createOrderFromProduct(payload.id, data);
+                return res.send(`Product with ID ${data.product_id} is successfull added`);
             }
-            return res.status(401).send("Token required");
+            return res.status(401).send('Token required');
         });
     }
 }

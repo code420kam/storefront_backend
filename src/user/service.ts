@@ -30,7 +30,7 @@ export default class UserService {
             // const con = await db.connect();
             const salt = await bcrypt.genSalt(10)
             const hash = await bcrypt.hashSync(user.password + process.env.SECRET_PW, salt)
-            const sql = `INSERT INTO users (firstname, lastname, passwort) VALUES ('${user.firstname}', '${user.lastname}', '${hash}')`
+            const sql = `INSERT INTO users (firstname, lastname, password) VALUES ('${user.firstname}', '${user.lastname}', '${hash}')`
             console.log(`New User ${user.firstname} ${user.lastname} successfully created`)
             const result = await db.query(sql)
             // con.release();
@@ -41,11 +41,11 @@ export default class UserService {
     }
     static async getPassword(user: User): Promise<null | User> {
         // const con = await db.connect();
-        const sql = `SELECT passwort FROM users WHERE (firstname='${user.firstname}') AND (lastname='${user.lastname}') `
+        const sql = `SELECT password FROM users WHERE (firstname='${user.firstname}') AND (lastname='${user.lastname}') `
         const result = await db.query(sql)
         const pw = user.password + 'secret12'
         // con.release();
-        if (bcrypt.compareSync(pw, result.rows[0].passwort)) {
+        if (bcrypt.compareSync(pw, result.rows[0].password)) {
             return user
         }
         return null

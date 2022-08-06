@@ -17,9 +17,9 @@ class OrderService {
     static getCurrentOrder(id) {
         return __awaiter(this, void 0, void 0, function* () {
             // const con = await db.connect();
-            const sql = yield db_1.default.query(`SELECT *, CASE WHEN order_status=true THEN 'complete' WHEN order_status=false THEN 'active'
-        END AS order_status FROM orders WHERE order_status=false AND user_id='${id}'`);
-            // con.release();
+            const sql = yield db_1.default.query(`SELECT orders.order_status, order_products.order_id, order_products.product_id, order_products.quantity,
+        orders.user_id,(CASE WHEN order_status=true THEN 'complete' WHEN order_status=false THEN 'active' END) AS order_status FROM
+        orders INNER JOIN order_products ON orders.order_id=order_products.order_id WHERE (user_id=${id})`);
             if (sql.rows.length === 0) {
                 return null;
             }

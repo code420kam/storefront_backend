@@ -20,7 +20,7 @@ export default class UserCtrl {
             lastname: req.body.lastname,
             password: req.body.password,
         }
-
+        console.log(user)
         const authentication = await UserService.getPassword(user)
 
         if (authentication === null) {

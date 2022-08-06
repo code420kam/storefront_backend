@@ -16,10 +16,10 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require("dotenv/config");
 function auth(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const token = req.header("authorization");
+        const token = req.header('authorization');
         const secret = process.env.SECRET_PW;
         if (!token) {
-            return res.status(401).send("Access denied. No token provided!");
+            return res.status(401).send('Access denied. No token provided!');
         }
         if (secret)
             try {
@@ -28,7 +28,7 @@ function auth(req, res, next) {
                 next();
             }
             catch (e) {
-                res.status(401).send("Token is expired please log in again");
+                res.status(401).send('Token is expired please log in again');
             }
     });
 }

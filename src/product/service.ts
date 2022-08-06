@@ -1,4 +1,5 @@
 import db from '../db'
+import { Data } from './controller'
 
 export type Product = {
     id?: number
@@ -35,11 +36,10 @@ export default class ProductService {
             console.log('Error at create Product Query ' + e)
         }
     }
-    // static async addProductToOrder(product: Product, user_id:string) {
-    //     // const con = await db.connect();
-    //     const sql = `INSERT INTO orders (quantity, product_id, user_id, order_status) VALUES (${product.quantity}, ${product.id}, '${user_id}', FALSE)`;
-    //     const result = await db.query(sql);
-    //     // con.release();
-    //     return result.rows;
-    // }
+    static async createOrderFromProduct(id: number, query: Data) {
+        await db.query(`INSERT INTO orders (user_id, order_status) VALUES ('${id}', 'FALSE') `)
+        const orderId = await db.query(`SELECT order_id FROM orders WHERE (user_id = ${id})`)
+        const productOrders = `INSERT INTO order_products (order_id, product_id, quantity) VALUES (${orderId.rows[0].order_id}, ${query.product_id}, ${query.quantity})`
+        return await db.query(productOrders)
+    }
 }

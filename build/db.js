@@ -11,5 +11,5 @@ exports.default = new pg_1.Pool({
     user: POSTGRES_USER,
     host: POSTGRES_URL,
     database: POSTGRES_DB,
-    password: POSTGRES_PASSWORD
+    password: POSTGRES_PASSWORD,
 });

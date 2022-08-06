@@ -26,10 +26,10 @@ const generateUserToken = (user) => __awaiter(void 0, void 0, void 0, function* 
             id: id,
             firstname: user.firstname,
             lastname: user.lastname,
-        }, secret, { expiresIn: "6000000" });
+        }, secret, { expiresIn: '6000000' });
     }
     else {
-        return "invalid secret!";
+        return 'invalid secret!';
     }
 });
 exports.generateUserToken = generateUserToken;
