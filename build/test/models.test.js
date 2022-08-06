@@ -80,7 +80,7 @@ describe('Testing products models', () => {
     }));
     describe('Testing order models', () => {
         test('get current order', () => __awaiter(void 0, void 0, void 0, function* () {
-            const result = yield service_3.default.getCurrentOrder('1');
+            const result = yield service_3.default.getCurrentOrder('2');
             expect(result).not.toBeNull();
         }));
         test('get not existing current order', () => __awaiter(void 0, void 0, void 0, function* () {

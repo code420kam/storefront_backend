@@ -116,7 +116,7 @@ describe('Testing products endpoint', () => {
 });
 describe('Testing order endpoint', () => {
     test('Try to get order by user id', () => __awaiter(void 0, void 0, void 0, function* () {
-        const req = request.get('/order/1');
+        const req = request.get('/order/2');
         req.set('Authorization', token);
         expect((yield req).status).toBe(200);
     }));

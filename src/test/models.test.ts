@@ -67,7 +67,7 @@ describe('Testing products models', (): void => {
     })
     describe('Testing order models', (): void => {
         test('get current order', async () => {
-            const result = await OrderService.getCurrentOrder('1')
+            const result = await OrderService.getCurrentOrder('2')
             expect(result).not.toBeNull()
         })
         test('get not existing current order', async (): Promise<void> => {

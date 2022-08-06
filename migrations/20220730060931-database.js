@@ -16,7 +16,6 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db) {
   return db.runSql(`
-  
   CREATE TABLE users(
     user_id INT GENERATED ALWAYS AS IDENTITY,
     firstname VARCHAR(60),

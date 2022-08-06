@@ -1,4 +1,4 @@
-import db from '../db'
+import client from '../db'
 import bcrypt from 'bcrypt'
 
 export type User = {
@@ -11,7 +11,7 @@ export type User = {
 export default class UserService {
     static async getById(id: string): Promise<undefined | string[]> {
         // const con = await client.connect();
-        const result = await db.query(`SELECT * FROM users WHERE user_id=${id}`)
+        const result = await client.query(`SELECT * FROM users WHERE user_id=${id}`)
         if (result.rows.length === 0) {
             return undefined
         }
@@ -20,7 +20,7 @@ export default class UserService {
 
     static async getAll(): Promise<string[]> {
         // const con = await client.connect();
-        const result = await db.query(`SELECT * from users`)
+        const result = await client.query(`SELECT * from users`)
         // con.release();
         return result.rows
     }
@@ -32,7 +32,7 @@ export default class UserService {
             const hash = await bcrypt.hashSync(user.password + process.env.SECRET_PW, salt)
             const sql = `INSERT INTO users (firstname, lastname, password) VALUES ('${user.firstname}', '${user.lastname}', '${hash}')`
             console.log(`New User ${user.firstname} ${user.lastname} successfully created`)
-            const result = await db.query(sql)
+            const result = await client.query(sql)
             // con.release();
             return result.rows
         } catch (e) {
@@ -42,7 +42,7 @@ export default class UserService {
     static async getPassword(user: User): Promise<null | User> {
         // const con = await db.connect();
         const sql = `SELECT password FROM users WHERE (firstname='${user.firstname}') AND (lastname='${user.lastname}') `
-        const result = await db.query(sql)
+        const result = await client.query(sql)
         const pw = user.password + 'secret12'
         // con.release();
         if (bcrypt.compareSync(pw, result.rows[0].password)) {

@@ -84,7 +84,7 @@ describe('Testing products endpoint', (): void => {
 })
 describe('Testing order endpoint', (): void => {
     test('Try to get order by user id', async (): Promise<void> => {
-        const req = request.get('/order/1')
+        const req = request.get('/order/2')
         req.set('Authorization', token)
         expect((await req).status).toBe(200)
     })
