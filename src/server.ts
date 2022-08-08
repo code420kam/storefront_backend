@@ -17,7 +17,8 @@ app.use('/user', userRouter)
 app.use('/products', productRouter)
 app.use('/order', orderRouter)
 app.get('/', function (req: Request, res: Response) {
-    res.send('Hello World!')
+    // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
+    res.send(req.body)
 })
 
 // server.listen(port)

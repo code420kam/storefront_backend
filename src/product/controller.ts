@@ -10,6 +10,7 @@ export type Data = {
 export default class ProductCtrl {
     static async allProducts(_req: Request, res: Response): Promise<void> {
         const products = await ProductService.getAllProducts()
+        // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")
         res.send(products)
     }
 

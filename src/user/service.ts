@@ -21,7 +21,7 @@ export default class UserService {
     static async getAll(): Promise<string[]> {
         // const con = await client.connect();
         const result = await client.query(`SELECT * from users`)
-        // con.release();
+        // con.release(); 
         return result.rows
     }
 

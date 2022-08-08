@@ -14,8 +14,8 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function(db) {
-  return db.runSql(`
+exports.up = function(client) {
+  return client.runSql(`
   CREATE TABLE users(
     user_id INT GENERATED ALWAYS AS IDENTITY,
     firstname VARCHAR(60),
@@ -66,8 +66,8 @@ exports.up = function(db) {
   `);
 };
 
-exports.down = function(db) {
-  return db.runSql(`
+exports.down = function(client) {
+  return client.runSql(`
   DROP TABLE IF EXISTS order_products;
   DROP TABLE IF EXISTS orders;
   DROP TABLE IF EXISTS users;
