@@ -4,6 +4,13 @@
     "host": {"ENV": "POSTGRES_URL"},
     "user": {"ENV": "POSTGRES_USER"},
     "password": {"ENV": "POSTGRES_PASSWORD"},
-    "database": {"ENV": "POSTGRES_DB"}
+    "database": {"ENV": "storefront_db"}
+  }, 
+  "test":{
+    "driver":"pg",
+    "host": {"ENV": "POSTGRES_URL"},
+    "user": {"ENV": "POSTGRES_USER"},
+    "password": {"ENV": "POSTGRES_PASSWORD"},
+    "database": {"ENV": "storefront_test_db"}
   }
 }
